@@ -1,0 +1,32 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+
+        mapping = {}
+
+        for char in s:
+            if char not in mapping:
+                mapping[char] = 0
+            
+            mapping[char] += 1
+        
+        is_there_odd = 0
+        longest_palindrome_count = 0
+
+        for key in mapping.keys():
+            if mapping[key] % 2 == 0:
+                longest_palindrome_count += mapping[key]
+            else:
+                longest_palindrome_count += mapping[key] - 1
+                is_there_odd = 1
+        
+        return longest_palindrome_count + is_there_odd
+
+"""
+mapping = {
+    letter: count of letter
+}
+
+then, take all letters whose counts are even, then take the most number of odd count letters and add
+
+take all the evens. Then for all the odds, take frequency - 1 i.e. make it even, then add 1 to the result.
+"""
